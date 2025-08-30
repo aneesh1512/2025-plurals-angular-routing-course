@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
 import { PieService } from '../../services/pie.service';
-import { BreadcrumbsComponent } from 'src/app/shared-ui/breadcrumbs/breadcrumbs.component';
 import { RouterLink } from '@angular/router';
 import { DETAIL_ROUTE } from 'src/app/app.routes';
 import { Category } from 'src/app/models/pie';
@@ -9,7 +8,7 @@ import { Category } from 'src/app/models/pie';
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrl: './all-products.component.scss',
-  imports: [BreadcrumbsComponent, RouterLink],
+  imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllProductsComponent {
