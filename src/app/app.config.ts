@@ -4,7 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
 import {InMemoryWebApiModule }from 'angular-in-memory-web-api';
 
 import { routes } from './app.routes';
@@ -20,7 +20,8 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled'
-      })
+      }),
+      withPreloading(PreloadAllModules)
     ),
     provideAnimations(),
     provideHttpClient(),
