@@ -29,6 +29,7 @@ export class PizzaComponent {
   protected readonly loading = signal(false);
   protected readonly submitted = signal(false);
   protected readonly cartService = inject(CartService);
+  protected readonly showLeaveModal = signal(false);
 
   protected readonly canSubmit = computed(() =>
     !!this.order().size && this.order().ingredients.length > 0 && !this.loading()
@@ -70,5 +71,28 @@ export class PizzaComponent {
 
   protected updateInstructions(value?: string | null) {
     this.order.update(order => ({ ...order, specialInstructions: value }));
+  }
+
+  protected attemptLeaveOrder() {
+    if (this.order().ingredients.length > 0 || this.order().specialInstructions) {
+      this.showLeaveModal.set(true);
+    } else {
+      this.clearOrderAndNavigate();
+    }
+  }
+
+  protected closeLeaveModal() {
+    this.showLeaveModal.set(false);
+  }
+
+  protected clearOrderAndNavigate() {
+    this.order.set({
+      size: 'medium',
+      ingredients: [],
+      specialInstructions: ''
+    });
+    this.submitted.set(false);
+    this.showLeaveModal.set(false);
+    // TODO: Add navigation logic here
   }
 }

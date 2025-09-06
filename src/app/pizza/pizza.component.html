@@ -68,4 +68,16 @@
     }
     </div>
   </div>
+  @if (showLeaveModal()) {
+    <div class="leave-modal-overlay" tabindex="-1" aria-modal="true" role="dialog">
+      <div class="leave-modal-content">
+        <h2>Leave Pizza Order?</h2>
+        <p>You have an in-progress pizza order. Are you sure you want to leave?</p>
+        <div class="modal-actions">
+          <button  mat-raised-button type="button" (click)="closeLeaveModal()">Continue Order</button>
+          <button mat-raised-button color="warn" type="button" (click)="clearOrderAndNavigate()">Clear Order &amp; Leave</button>
+        </div>
+      </div>
+    </div>
+  }
 </section>

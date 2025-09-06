@@ -33,7 +33,7 @@
               mat-menu-item
               >All Pies</a
             >
-            @if(authService.authenticatedUser.value()) {
+            @if(flagService.isPizzaFeatureEnabled.value() && authService.authenticatedUser.value()) {
               <a
               [routerLink]="[PIZZA_ROUTE]"
                 mat-menu-item

@@ -16,6 +16,7 @@ import {
   PIZZA_ROUTE,
 } from '../app.routes';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FeatureFlagService } from '../services/feature-flag.service';
 
 @Component({
     selector: 'app-header',
@@ -26,6 +27,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   protected readonly pieService = inject(PieService);
   protected readonly authService = inject(AuthService);
+  protected readonly flagService = inject(FeatureFlagService);
   protected cartService = inject(CartService);
 
   protected readonly PRODUCTS_ROUTE = PRODUCTS_ROUTE;
