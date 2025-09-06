@@ -1,0 +1,71 @@
+<section class="main-content">
+  <app-breadcrumbs route="Pizza"/>
+  <div class="contact-wrapper">
+    <div class="image-wrapper">
+      <img
+        src="../../assets/images/pizza-2.jpg"
+        alt="Delicious pizza"
+        class="pizza-image"
+      />
+    </div>
+    <div class="form-wrapper">
+      <h3>Customize Your Pizza!</h3>
+      <p>We will ship it to you!</p>
+      @if(!loading() && !submitted()) {
+
+      <fieldset>
+        <form (submit)="submitOrder(); $event.preventDefault()">
+          <div class="pizza-size-options">
+            <label>Size:</label>
+            <label>
+              <input type="radio" name="size" value="small" [checked]="order().size === 'small'" (change)="updateSize('small')" />
+              Small
+            </label>
+            <label>
+              <input type="radio" name="size" value="medium" [checked]="order().size === 'medium'" (change)="updateSize('medium')" />
+              Medium
+            </label>
+            <label>
+              <input type="radio" name="size" value="large" [checked]="order().size === 'large'" (change)="updateSize('large')" />
+              Large
+            </label>
+          </div>
+
+          <div>
+            <label>Toppings:</label>
+            <div class="toppings-list">
+              @for (topping of availableToppings; track topping) {
+                <label>
+                  <input
+                    type="checkbox"
+                    [checked]="order().ingredients.includes(topping)"
+                    (change)="updateTopping(topping, $event.target.checked)"
+                  />
+                  {{ topping }}
+                </label>
+              }
+            </div>
+          </div>
+
+          <div>
+            <label for="instructions">Special Instructions:</label>
+            <textarea
+              id="instructions"
+              rows="2"
+              [value]="order().specialInstructions"
+              (input)="updateInstructions('')"
+            ></textarea>
+          </div>
+
+          <button class="button" mat-raised-button type="submit" [disabled]="!canSubmit()">Add to Cart</button>
+        </form>
+      </fieldset>
+    } @else if(loading()) {
+      <div class="loading-spinner">Loading...</div>
+    } @else if(submitted()) {
+      <div class="submitted-msg">Thank you for your order! Your delicious pizza is on its way!</div>
+      <button class="button" mat-raised-button (click)="newOrder()">Create Another Pizza Pie!</button>
+    }
+    </div>
+  </div>
+</section>

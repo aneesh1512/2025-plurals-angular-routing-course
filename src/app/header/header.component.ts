@@ -13,6 +13,7 @@ import {
   DETAIL_ROUTE,
   CONTACT_ROUTE,
   CART_ROUTE,
+  PIZZA_ROUTE,
 } from '../app.routes';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -34,4 +35,5 @@ export class HeaderComponent {
   protected readonly DETAIL_ROUTE = DETAIL_ROUTE;
   protected readonly CONTACT_ROUTE = CONTACT_ROUTE;
   protected readonly CART_ROUTE = CART_ROUTE;
+  protected readonly PIZZA_ROUTE = PIZZA_ROUTE;
 }
