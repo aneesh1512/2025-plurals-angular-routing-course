@@ -17,7 +17,7 @@
           <app-cart-button [item]="item" />
         </div>
         <div class="cart-item-price-wrapper">
-          <p class="cart-item-price">{{ item.price }}</p>
+          <p class="cart-item-price">{{ item.price | currency }}</p>
         </div>
       </div>
     }

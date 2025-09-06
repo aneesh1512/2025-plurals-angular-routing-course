@@ -22,6 +22,10 @@ export const routes: Routes = [
     component: NewHomeComponent,
   },
   {
+    path: HOME_ROUTE,
+    component: HomeComponent,
+  },
+  {
     path: `${PRODUCTS_ROUTE}`,
     loadComponent: () => import('./products/wrapper.component').then(m => m.WrapperComponent),
     loadChildren: () => import('./products/products.routes').then(m => m.PRODUCTS_ROUTES),
@@ -33,6 +37,16 @@ export const routes: Routes = [
   {
     path: PIZZA_ROUTE,
     loadComponent: () => import('./pizza/pizza.component').then(m => m.PizzaComponent),
+    children: [
+      {
+        path:'',
+        loadComponent: () => import('./pizza/pizza-form/pizza-form.component').then(m => m.PizzaFormComponent),
+      },
+      {
+        path:'',
+        loadComponent: () => import('./pizza/pizza-not-found/pizza-not-found.component').then(m => m.PizzaNotFoundComponent),
+      },
+    ]
   },
   {
     path: CONTACT_ROUTE,

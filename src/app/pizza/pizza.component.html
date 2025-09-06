@@ -1,83 +1,11 @@
 <section class="main-content">
-  <app-breadcrumbs route="Pizza"/>
+  <app-breadcrumbs route="Pizza" />
   <div class="contact-wrapper">
     <div class="image-wrapper">
-      <img
-        src="../../assets/images/pizza-2.jpg"
-        alt="Delicious pizza"
-        class="pizza-image"
-      />
+      <img src="../../assets/images/pizza-2.jpg" alt="" />
     </div>
     <div class="form-wrapper">
-      <h3>Customize Your Pizza!</h3>
-      <p>We will ship it to you!</p>
-      @if(!loading() && !submitted()) {
-
-      <fieldset>
-        <form (submit)="submitOrder(); $event.preventDefault()">
-          <div class="pizza-size-options">
-            <label>Size:</label>
-            <label>
-              <input type="radio" name="size" value="small" [checked]="order().size === 'small'" (change)="updateSize('small')" />
-              Small
-            </label>
-            <label>
-              <input type="radio" name="size" value="medium" [checked]="order().size === 'medium'" (change)="updateSize('medium')" />
-              Medium
-            </label>
-            <label>
-              <input type="radio" name="size" value="large" [checked]="order().size === 'large'" (change)="updateSize('large')" />
-              Large
-            </label>
-          </div>
-
-          <div>
-            <label>Toppings:</label>
-            <div class="toppings-list">
-              @for (topping of availableToppings; track topping) {
-                <label>
-                  <input
-                    type="checkbox"
-                    [checked]="order().ingredients.includes(topping)"
-                    (change)="updateTopping(topping, $event.target.checked)"
-                  />
-                  {{ topping }}
-                </label>
-              }
-            </div>
-          </div>
-
-          <div>
-            <label for="instructions">Special Instructions:</label>
-            <textarea
-              id="instructions"
-              rows="2"
-              [value]="order().specialInstructions"
-              (input)="updateInstructions('')"
-            ></textarea>
-          </div>
-
-          <button class="button" mat-raised-button type="submit" [disabled]="!canSubmit()">Add to Cart</button>
-        </form>
-      </fieldset>
-    } @else if(loading()) {
-      <div class="loading-spinner">Loading...</div>
-    } @else if(submitted()) {
-      <div class="submitted-msg">Thank you for your order! Your delicious pizza is on its way!</div>
-      <button class="button" mat-raised-button (click)="newOrder()">Create Another Pizza Pie!</button>
-    }
+    <router-outlet/>
     </div>
   </div>
-  @if (showLeaveModal()) {
-    <div class="leave-modal-overlay" tabindex="-1" aria-modal="true" role="dialog">
-      <div class="leave-modal-content">
-        <h2>Leave Pizza Order?</h2>
-        <p>You have an in-progress pizza order. Are you sure you want to leave?</p>
-        <div class="modal-actions">
-          <button  mat-raised-button type="button" (click)="closeLeaveModal()">Continue Order</button>
-          <button mat-raised-button color="warn" type="button" (click)="clearOrderAndNavigate()">Clear Order &amp; Leave</button>
-        </div>
-      </div>
-    </div>
-  }
 </section>

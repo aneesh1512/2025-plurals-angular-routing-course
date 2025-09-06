@@ -25,7 +25,8 @@ export function createPizzaOrder({
 }): PizzaOrder {
   const basePrice = 19.99;
   const toppingPrice = 0.5;
-  const price = basePrice + ingredients.length * toppingPrice;
+  const sizeAdapter = size === 'small' ? .8 : size === 'large' ? 1.2 : 1;
+  const price = basePrice + ingredients.length * toppingPrice * sizeAdapter;
   const id = `pizza-${Math.random().toString(36).slice(2, 10)}`;
   const description = `${size} pizza with ${ingredients.join(', ')}${specialInstructions ? ' - ' + specialInstructions : ''}`;
 
@@ -44,20 +45,22 @@ export function createPizzaOrder({
 }
 
 export const AVAILABLE_TOPPINGS = [
-  'Extra cheese',
+  'No Toppings',
   'Pineapple',
-  'Spinach',
-  'Pickled ginger',
-  'Fennel',
+  'Peaches',
+  'Meat',
+  'Cream cheese',
   'Roasted beets',
-  'Zaatar spice',
-  'Chickpeas',
+  'Meringue',
+  'Olive medley',
   'Sliced pears',
   'Blue cheese',
-  'Fresh figs',
+  'Pie crust',
   'Canned tuna',
   'Marshmallows',
   'Peanut butter',
   'Cucumber slices',
+  'Chocolate chips',
   'Lemon wedges',
+  'Whipped cream',
 ];
