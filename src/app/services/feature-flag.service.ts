@@ -1,17 +1,17 @@
-import { Injectable, resource } from '@angular/core';import { from } from 'rxjs';
+import { Injectable, resource } from '@angular/core';import { rxResource } from '@angular/core/rxjs-interop';
+import { from, map } from 'rxjs';
 ;
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
-  constructor() {
-    console.log('FeatureFlagService initialized');
-  }
-  readonly featureFlags = fetch('/assets/feature-flags.json').then(res => res.json())
+  readonly featureFlags = from(fetch('/assets/feature-flags.json').then(res => res.json())
   .then(json => {
     return json as {isPizzaFeatureEnabled: boolean};
-  });
+  }));
 
-  isPizzaFeatureEnabled = resource({loader: () => this.featureFlags.then(flags => flags.isPizzaFeatureEnabled)});
+  isPizzaFeatureEnabled$ = this.featureFlags.pipe(map(flags => flags.isPizzaFeatureEnabled));
+
+  isPizzaFeatureEnabled = rxResource({stream: () => this.featureFlags.pipe(map(flags => flags.isPizzaFeatureEnabled))});
 }

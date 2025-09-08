@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { NewHomeComponent } from './home/new-home/new-home.component';
 
 export const HOME_ROUTE = 'home';
+export const NEW_HOME_ROUTE = 'new-home';
 export const PRODUCTS_ROUTE = 'products';
 export const DETAIL_ROUTE = 'detail';
 export const LOGIN_ROUTE = 'login';
@@ -18,7 +19,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: HOME_ROUTE,
+    path: NEW_HOME_ROUTE,
     component: NewHomeComponent,
   },
   {
