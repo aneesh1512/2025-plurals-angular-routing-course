@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BreadcrumbsComponent } from '../shared-ui/breadcrumbs/breadcrumbs.component';
-import { MESSAGE_SERVICE, MessageService } from '../services/message.service';
+import { MESSAGE_SERVICE } from '../services/message.service';
 
 @Component({
   selector: 'app-contact',
@@ -23,7 +23,7 @@ import { MESSAGE_SERVICE, MessageService } from '../services/message.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent implements OnDestroy{
-  protected readonly messageService = inject<MessageService>(MESSAGE_SERVICE, {optional: true});
+  protected readonly messageService = inject(MESSAGE_SERVICE, {optional: true});
 
   readonly contactService = inject(ContactService);
   destroyed$ = new ReplaySubject<void>(1);

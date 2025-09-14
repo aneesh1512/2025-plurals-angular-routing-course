@@ -5,7 +5,7 @@ export interface MessageService {
   featureSubheader?: string;
 }
 
-export const MESSAGE_SERVICE = new InjectionToken('Message Service');
+export const MESSAGE_SERVICE = new InjectionToken<MessageService>('Message Service');
 
 export const contactMessageService: MessageService = {
   featureHeader: 'You Can Email Us If You Want',
