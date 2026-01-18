@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
 import { PieService } from '../../services/pie.service';
 import { BreadcrumbsComponent } from 'src/app/shared-ui/breadcrumbs/breadcrumbs.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DETAIL_ROUTE } from 'src/app/app.routes';
+import { ALL, Category } from 'src/app/models/pie';
 
 @Component({
   selector: 'app-all-products',
@@ -13,11 +14,13 @@ import { DETAIL_ROUTE } from 'src/app/app.routes';
 })
 export class AllProductsComponent {
   readonly pieService = inject(PieService);
+  category = input<Category>(ALL);
+
   pies = this.pieService.filteredPies;
 
   protected readonly DETAIL_ROUTE = DETAIL_ROUTE;
 
-  selectPie(id: string){
-    this.pieService.setSelectedPie(id);
-  }
+  eff = effect(() => {
+    this.pieService.setSelectedCategory(this.category());
+  });
 }

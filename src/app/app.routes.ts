@@ -30,7 +30,7 @@ export const routes: Routes = [
     path: PRODUCTS_ROUTE,
     children: [
       {
-        path: '',
+        path: ':category',
         component: AllProductsComponent,
       },
       {

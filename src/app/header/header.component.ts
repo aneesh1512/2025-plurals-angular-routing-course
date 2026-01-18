@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Category } from '../models/pie';
+import { Category, FRUIT_PIE, SEASONAL_PIE, CHEESECAKE, ALL } from '../models/pie';
 import { PieService } from '../services/pie.service';
 import { MatMenuItem, MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { MatButton } from '@angular/material/button';
@@ -35,8 +35,9 @@ export class HeaderComponent {
   protected readonly CONTACT_ROUTE = CONTACT_ROUTE;
   protected readonly CART_ROUTE = CART_ROUTE;
 
-  changeCategory(category: Category){
-    this.pieService.clearSelectedPie();
-    this.pieService.setSelectedCategory(category);
-  }
+  protected readonly FRUIT_PIE = FRUIT_PIE;
+  protected readonly SEASONAL_PIE = SEASONAL_PIE;
+  protected readonly CHEESECAKE = CHEESECAKE;
+  protected readonly ALL = ALL;
+
 }

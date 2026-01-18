@@ -1,15 +1,23 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { Category, Pie } from '../models/pie';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { ALL, Category, Pie } from '../models/pie';
 import { httpResource } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PieService {
   readonly selectedCategory = signal<Category>('All Pies');
-  readonly selectedPieId = signal<string | undefined>(undefined);
-
   readonly pies = httpResource<Pie[]>(() => '/api/pies');
+  readonly route = inject(ActivatedRoute);
+
+
+  readonly selectedPieId = toSignal(
+    this.route.queryParamMap.pipe(map((params:any) => params.get('pieId'))));
+
+s = effect(() => {   console.log(this.selectedPieId())});
 
   readonly selectedPie = httpResource<Pie | undefined>(() => `/api/pies/${this.selectedPieId()}`);
 
@@ -24,13 +32,13 @@ export class PieService {
   });
 
 
-  setSelectedPie(id: string) {
-    this.selectedPieId.set(id);
-  }
+  // setSelectedPie(id: string) {
+  //   this.selectedPieId.set(id);
+  // }
 
-  clearSelectedPie() {
-    this.selectedPieId.set(undefined);
-  }
+  // clearSelectedPie() {
+  //   this.selectedPieId.set(undefined);
+  // }
 
   setSelectedCategory(category: Category) {
     this.selectedCategory.set(category);
