@@ -1,13 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { AllProductsComponent } from './products/all-products/all-products.component';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
-import { CartComponent } from './cart/cart.component';
-import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { WrapperComponent } from './products/wrapper.component';
 
 export const HOME_ROUTE = 'home';
 export const PRODUCTS_ROUTE = 'products';
@@ -29,36 +22,28 @@ export const routes: Routes = [
   },
   {
     path: `${PRODUCTS_ROUTE}/:categoryId`,
-    component: WrapperComponent,
-    children: [
-      {
-        path: '',
-        component: AllProductsComponent,
-      },
-      {
-        path: DETAIL_ROUTE,
-        component: ProductDetailComponent,
-      },
-    ]
+    loadComponent: () => import('./products/wrapper.component').then(m => m.WrapperComponent),
+    loadChildren: () => import('./app.product.route').then(m => m.PRODUCTS_ROUTE),
   },
   {
     path: LOGIN_ROUTE,
-    component: LoginComponent,
+    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
   },
   {
     path: CONTACT_ROUTE,
-    component: ContactComponent,
+    loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent),
   },
   {
     path: CART_ROUTE,
-    component: CartComponent,
+    loadComponent: () => import('./cart/cart.component').then(m => m.CartComponent),
   },
   {
     path: ABOUT_ROUTE,
-    component: AboutComponent,
+    loadComponent: () => import('./about/about.component').then(m => m.AboutComponent),
   },
   {
     path: '**',
+     loadComponent: () => import('./about/about.component').then(m => m.AboutComponent),
     component: NotFoundComponent,
   },
 ];
